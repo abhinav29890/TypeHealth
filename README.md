@@ -41,7 +41,7 @@ offline mode and "install to home screen" need HTTPS (or localhost). The GitHub 
 
 1. Push this repo to GitHub.
 2. Open `training/notebooks/02_train_condition.ipynb` in Google Colab
-   (File → Open notebook → GitHub), pick **Runtime → T4 GPU**, set `REPO_URL`, add your free Kaggle
+   (File → Open notebook → GitHub), pick **Runtime → T4 GPU**, add your free Kaggle
    API key as Colab secrets (`KAGGLE_USERNAME`, `KAGGLE_KEY`), and run all cells. That's about 15–25 minutes.
 3. Download the zip it produces and unzip it at the project root. This replaces `web/models/condition.*`
    and adds `training/reports/condition_*`.
