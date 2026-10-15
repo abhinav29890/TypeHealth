@@ -1,0 +1,26 @@
+{
+  "task": "condition",
+  "file": "condition.onnx",
+  "sha256": "96f579e34218f9b9",
+  "labels": [
+    "good",
+    "defective",
+    "not_tyre"
+  ],
+  "input_size": 224,
+  "mean": [
+    0.485,
+    0.456,
+    0.406
+  ],
+  "std": [
+    0.229,
+    0.224,
+    0.225
+  ],
+  "arch": "efficientnet_b0",
+  "quantized": true,
+  "int8_agreement": 0.9375,
+  "placeholder": true,
+  "metrics": null
+}

@@ -1,0 +1,50 @@
+{
+  "_comment": "Edit freely. 'map' keys are folder names / label names in the source (lower-case); values are our class names from src/config.py. Set \"enabled\": false to skip a source.",
+  "condition": [
+    {
+      "type": "kaggle",
+      "name": "tyre_quality",
+      "slug": "warcoder/tyre-quality-classification",
+      "map": {"defective": "defective", "good": "good"},
+      "enabled": true
+    },
+    {
+      "type": "kaggle",
+      "name": "tire_texture",
+      "slug": "jehanbhathena/tire-texture-image-recognition",
+      "map": {"cracked": "defective", "normal": "good"},
+      "enabled": true
+    },
+    {
+      "type": "imagenette",
+      "name": "not_tyre",
+      "count": 1000,
+      "target": "not_tyre",
+      "enabled": true
+    },
+    {
+      "type": "folder",
+      "name": "own",
+      "path": "data/own/condition",
+      "enabled": true
+    }
+  ],
+  "tread": [
+    {
+      "type": "roboflow",
+      "name": "rf_tread",
+      "workspace": "multichart",
+      "project": "tyre-tread-detection-ulhub",
+      "version": 1,
+      "kind": "detection",
+      "map": {"tread": "good", "tread-shallow": "worn"},
+      "enabled": true
+    },
+    {
+      "type": "folder",
+      "name": "own",
+      "path": "data/own/tread",
+      "enabled": true
+    }
+  ]
+}

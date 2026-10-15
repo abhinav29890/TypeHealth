@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Training artefacts (large / regenerable)
+data/
+checkpoints/
+training/data/
+training/checkpoints/
+*.fp32.onnx
+*.preproc.onnx
+kaggle.json
+
+# IDE
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store

@@ -1,0 +1,120 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TyreCheck</title>
+  <meta name="description" content="On-device tyre health check from a photo. Condition and tread wear, analysed privately in your browser.">
+  <meta name="theme-color" content="#1f2933">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img src="icons/icon.svg" alt="" width="28" height="28">
+      <span>TyreCheck</span>
+    </div>
+    <span id="model-status" class="pill pill-loading" role="status">Loading modelsâ€¦</span>
+  </header>
+
+  <main>
+    <div id="demo-banner" class="banner" hidden>
+      <strong>Demo mode:</strong> these are untrained placeholder models, so the results are random.
+      Train real models with the notebooks in <code>training/notebooks</code>.
+    </div>
+    <div id="error-banner" class="banner banner-error" hidden></div>
+
+    <section class="card" aria-labelledby="job-title">
+      <h2 id="job-title">Job details <span class="muted">(optional)</span></h2>
+      <div class="grid-3">
+        <label>Vehicle reg.
+          <input id="vehicle" type="text" autocomplete="off" placeholder="e.g. KA01AB1234">
+        </label>
+        <label>Tyre position
+          <select id="position">
+            <option value="">â€”</option>
+            <option>Front left</option>
+            <option>Front right</option>
+            <option>Rear left</option>
+            <option>Rear right</option>
+            <option>Spare</option>
+          </select>
+        </label>
+        <label>Notes
+          <input id="notes" type="text" autocomplete="off" placeholder="e.g. customer reports vibration">
+        </label>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="photo-title">
+      <h2 id="photo-title">Tyre photo</h2>
+      <div id="dropzone" class="dropzone">
+        <div class="capture-buttons">
+          <label class="btn btn-primary">
+            <input id="camera-input" type="file" accept="image/*" capture="environment" class="visually-hidden">
+            Take photo
+          </label>
+          <label class="btn">
+            <input id="file-input" type="file" accept="image/*" class="visually-hidden">
+            Upload image
+          </label>
+        </div>
+        <p class="muted small">or drag &amp; drop an image here</p>
+        <ul class="tips small">
+          <li>Fill the frame with the tread or sidewall. The centre square is what gets analysed.</li>
+          <li>Use good, even light and avoid glare. Hold the camera steady.</li>
+          <li>Wipe off heavy mud first if you can.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="result" class="card result" hidden aria-live="polite">
+      <div class="result-grid">
+        <div class="photo-col">
+          <div class="photo-wrap">
+            <canvas id="photo" width="448" height="448" aria-label="Analysed area of the photo"></canvas>
+            <canvas id="overlay" width="448" height="448" aria-hidden="true"></canvas>
+            <div id="busy" class="busy" hidden><div class="spinner"></div><span>Analysingâ€¦</span></div>
+          </div>
+          <div id="view-toggle" class="segmented" role="radiogroup" aria-label="Overlay">
+            <button type="button" role="radio" aria-checked="true" data-view="none">Photo</button>
+            <button type="button" role="radio" aria-checked="false" data-view="condition">Damage map</button>
+            <button type="button" role="radio" aria-checked="false" data-view="tread">Wear map</button>
+          </div>
+          <p class="muted small">Heatmaps show where the model looked when making its decision.</p>
+        </div>
+
+        <div class="report-col">
+          <div id="quality" class="quality" hidden></div>
+          <div id="report"></div>
+          <div class="actions no-print">
+            <button id="print-btn" type="button" class="btn">Print / save PDF</button>
+            <button id="new-btn" type="button" class="btn btn-primary">New check</button>
+          </div>
+        </div>
+      </div>
+      <p class="disclaimer small">
+        This is an AI-assisted visual check, not a substitute for a physical inspection
+        and tread-depth gauge measurement.
+      </p>
+    </section>
+
+    <section class="card no-print" aria-labelledby="history-title">
+      <div class="row-between">
+        <h2 id="history-title">Recent checks <span class="muted">(this device only)</span></h2>
+        <button id="clear-history" type="button" class="btn btn-ghost small">Clear</button>
+      </div>
+      <ul id="history" class="history"></ul>
+    </section>
+  </main>
+
+  <footer class="no-print">
+    <p class="small muted">Runs entirely on this device. Photos are never uploaded. Works offline after the first visit.</p>
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
