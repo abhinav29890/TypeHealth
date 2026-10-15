@@ -31,13 +31,17 @@
   ],
   "tread": [
     {
-      "type": "roboflow",
-      "name": "rf_tread",
-      "workspace": "multichart",
-      "project": "tyre-tread-detection-ulhub",
-      "version": 1,
-      "kind": "detection",
-      "map": {"tread": "good", "tread-shallow": "worn"},
+      "type": "kaggle",
+      "name": "tyre_condition_workshop",
+      "slug": "sameersambhare1/tyre-condition-classification-dataset",
+      "map": {"new": "good", "serviceable": "moderate", "unusable": "worn"},
+      "enabled": true
+    },
+    {
+      "type": "kaggle",
+      "name": "tire_tread_photos",
+      "slug": "numberfive/tire-tread-photos",
+      "map": {"goodtiretread": "good", "badtiretread": "worn"},
       "enabled": true
     },
     {

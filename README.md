@@ -45,8 +45,8 @@ offline mode and "install to home screen" need HTTPS (or localhost). The GitHub 
    API key as Colab secrets (`KAGGLE_USERNAME`, `KAGGLE_KEY`), and run all cells. That's about 15–25 minutes.
 3. Download the zip it produces and unzip it at the project root. This replaces `web/models/condition.*`
    and adds `training/reports/condition_*`.
-4. Repeat with `03_train_tread.ipynb`. It also needs a free Roboflow API key (`ROBOFLOW_API_KEY`).
-   **Strongly recommended:** upload 100–200 of your own tread photos per class (see the notebook).
+4. Repeat with `03_train_tread.ipynb`. It uses the same Kaggle key. **Recommended:** add 100–200 of
+   your own tread photos per class (set `UPLOAD_OWN_PHOTOS = True` in the notebook).
 5. Commit and push. The app picks up the new models automatically (cache-busted by hash).
 
 ### Data sources
@@ -56,7 +56,8 @@ offline mode and "install to home screen" need HTTPS (or localhost). The GitHub 
 | condition | [Kaggle: Tyre Quality Classification](https://www.kaggle.com/datasets/warcoder/tyre-quality-classification) | ~1.8k images, good / defective |
 | condition | [Kaggle: Tire Texture Image Recognition](https://www.kaggle.com/datasets/jehanbhathena/tire-texture-image-recognition) | ~1k images, cracked / normal |
 | condition | [Imagenette](https://github.com/fastai/imagenette) | ~1k random non-tyre photos for the `not_tyre` class |
-| tread | [Roboflow: tyre-tread-detection](https://universe.roboflow.com/multichart/tyre-tread-detection-ulhub) | boxes cropped: `tread`→good, `tread-shallow`→worn. Check the version number and class names |
+| tread | [Kaggle: Tyre Condition Classification Dataset](https://www.kaggle.com/datasets/sameersambhare1/tyre-condition-classification-dataset) | ~550 workshop photos: NEW→good, SERVICEABLE→moderate, UNUSABLE→worn |
+| tread | [Kaggle: Tire Tread Photos](https://www.kaggle.com/datasets/numberfive/tire-tread-photos) | ~370 images: GoodTireTread→good, BadTireTread→worn |
 | both | your own photos | `training/data/own/<task>/<class>/*.jpg`, picked up automatically |
 
 Add more sources (Kaggle, Roboflow, Hugging Face, local folders) by editing `training/sources.json`.
@@ -104,7 +105,7 @@ pytest tests                               # ONNX parity + train→evaluate→ex
 ## Limitations
 
 - This is a **visual screening aid**, not a replacement for a physical inspection and a tread-depth gauge.
-- Public tread-wear data is scarce, so expect the tread model to be the weaker of the two until it's
-  trained on the mechanic's own photos. Re-train whenever you have collected more labelled photos.
+- The public tread data is small (~900 images, only ~200 "worn"), so expect the tread model to be the
+  weaker of the two until it's also trained on the mechanic's own photos. Re-train whenever you have collected more labelled photos.
 - Score thresholds in `scoring.js` and quality thresholds in `quality.js` are starting points. Tune them on
   real photos from the workshop.
