@@ -129,6 +129,7 @@ main { max-width: 980px; margin: 0 auto; padding: 16px; display: grid; gap: 16px
   color: var(--text);
   font: inherit;
   font-weight: 600;
+  text-decoration: none;
   cursor: pointer;
 }
 .btn:hover { background: var(--surface-2); }

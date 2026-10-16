@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TyreCheck Samples</title>
+  <meta name="description" content="Ten freely licensed tyre photos for testing TyreCheck.">
+  <link rel="icon" href="../icons/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .samples { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+    .sample { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+    .sample img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; }
+    .sample-body { padding: 12px 14px 14px; display: grid; gap: 6px; justify-items: start; }
+    .credit { margin: 4px 0 0; overflow-wrap: anywhere; }
+    .credit a, .intro a { color: inherit; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../" style="color:inherit;text-decoration:none">
+      <img src="../icons/icon.svg" alt="" width="28" height="28"><span>TyreCheck</span>
+    </a>
+    <a class="btn btn-primary" href="../">Open the app</a>
+  </header>
+  <main>
+    <section class="card intro">
+      <h2>Sample photos for testing</h2>
+      <p class="small">Tap <strong>Download</strong> to save a photo, then open the app and choose <strong>Upload image</strong>.
+      The thumbnails show the centre square the app analyses. "Expected" is what a mechanic would conclude.
+      The current models get some of these wrong, which makes them useful for testing.</p>
+    </section>
+    <ul class="samples">
+      <li class="card sample">
+        <a href="01-new-winter-tyre.jpg" download><img src="01-new-winter-tyre.jpg" alt="New winter tyre, deep tread" loading="lazy"></a>
+        <div class="sample-body">
+          <div class="finding-text">New winter tyre, deep tread</div>
+          <div class="small">Expected: <strong class="status-ok">Good</strong></div>
+          <a class="btn" href="01-new-winter-tyre.jpg" download>Download</a>
+          <p class="small muted credit">Photo: Oregon Department of Transportation, <a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Snow_tire_tread_(54090730101).jpg">Wikimedia Commons</a></p>
+        </div>
+      </li>
+      <li class="card sample">
+        <a href="02-used-deep-tread.jpg" download><img src="02-used-deep-tread.jpg" alt="Used tyre, deep tread" loading="lazy"></a>
+        <div class="sample-body">
+          <div class="finding-text">Used tyre, deep tread</div>
+          <div class="small">Expected: <strong class="status-ok">Good</strong></div>
+          <a class="btn" href="02-used-deep-tread.jpg" download>Download</a>
+          <p class="small muted credit">Photo: TireZoo from United States, <a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Used_Tire_Tread_(5690529503).jpg">Wikimedia Commons</a></p>
+        </div>
+      </li>
+      <li class="card sample">
+        <a href="03-winter-tyre-angled.jpg" download><img src="03-winter-tyre-angled.jpg" alt="Winter tyre tread, angled" loading="lazy"></a>
+        <div class="sample-body">
+          <div class="finding-text">Winter tyre tread, angled</div>
+          <div class="small">Expected: <strong class="status-ok">Good</strong></div>
+          <a class="btn" href="03-winter-tyre-angled.jpg" download>Download</a>
+          <p class="small muted credit">Photo: Lombroso, Public domain, via <a href="https://commons.wikimedia.org/wiki/File:Studless_tire_2.jpg">Wikimedia Commons</a></p>
+        </div>
+      </li>
+      <li class="card sample">
+        <a href="04-partly-worn-summer.jpg" download><img src="04-partly-worn-summer.jpg" alt="Summer tyre, partly worn" loading="lazy"></a>
+        <div class="sample-body">
+          <div class="finding-text">Summer tyre, partly worn</div>
+          <div class="small">Expected: <strong class="status-monitor">Monitor</strong></div>
+          <a class="btn" href="04-partly-worn-summer.jpg" download>Download</a>
+          <p class="small muted credit">Photo: Quallyptus, <a href="http://creativecommons.org/publicdomain/zero/1.0/deed.en">CC0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Autoreifen_mit_Verschlei%C3%9Fanzeige.JPG">Wikimedia Commons</a></p>
+        </div>
+      </li>
+      <li class="card sample">
+        <a href="05-partly-worn-pair.jpg" download><img src="05-partly-worn-pair.jpg" alt="Pair of partly worn tyres" loading="lazy"></a>
+        <div class="sample-body">
+          <div class="finding-text">Pair of partly worn tyres</div>
+          <div class="small">Expected: <strong class="status-monitor">Monitor</strong></div>
+          <a class="btn" href="05-partly-worn-pair.jpg" download>Download</a>
+          <p class="small muted credit">Photo: Trubble, <a href="https://creativecommons.org/licenses/by-sa/2.0">CC BY-SA 2.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Michelin_Pilot_Primacy_HP_(5285287620).jpg">Wikimedia Commons</a></p>
+        </div>
+      </li>
+      <li class="card sample">
+        <a href="06-bald-tyre.jpg" download><img src="06-bald-tyre.jpg" alt="Bald tyre" loading="lazy"></a>
+        <div class="sample-body">
+          <div class="finding-text">Bald tyre</div>
+          <div class="small">Expected: <strong class="status-replace">Replace</strong></div>
+          <a class="btn" href="06-bald-tyre.jpg" download>Download</a>
+          <p class="small muted credit">Photo: PookieFugglestein, <a href="http://creativecommons.org/publicdomain/zero/1.0/deed.en">CC0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Bald_tyre.jpg">Wikimedia Commons</a></p>
+        </div>
+      </li>
+      <li class="card sample">
+        <a href="07-weather-cracked.jpg" download><img src="07-weather-cracked.jpg" alt="Weather-cracked tread blocks" loading="lazy"></a>
+        <div class="sample-body">
+          <div class="finding-text">Weather-cracked tread blocks</div>
+          <div class="small">Expected: <strong class="status-replace">Replace</strong></div>
+          <a class="btn" href="07-weather-cracked.jpg" download>Download</a>
+          <p class="small muted credit">Photo: Griffinstorm, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Weather-cracked_Tire.JPG">Wikimedia Commons</a></p>
+        </div>
+      </li>
+      <li class="card sample">
+        <a href="08-puncture.jpg" download><img src="08-puncture.jpg" alt="Repaired puncture in tread" loading="lazy"></a>
+        <div class="sample-body">
+          <div class="finding-text">Repaired puncture in tread</div>
+          <div class="small">Expected: <strong class="status-replace">Repair</strong></div>
+          <a class="btn" href="08-puncture.jpg" download>Download</a>
+          <p class="small muted credit">Photo: Famartin, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:2022-07-01_23_20_01_A_puncture_in_a_automobile_tire_along_Aquetong_Lane_in_the_Mountainview_section_of_Ewing_Township,_Mercer_County,_New_Jersey.jpg">Wikimedia Commons</a></p>
+        </div>
+      </li>
+      <li class="card sample">
+        <a href="09-torn-tread.jpg" download><img src="09-torn-tread.jpg" alt="Torn / separated tread" loading="lazy"></a>
+        <div class="sample-body">
+          <div class="finding-text">Torn / separated tread</div>
+          <div class="small">Expected: <strong class="status-replace">Replace</strong></div>
+          <a class="btn" href="09-torn-tread.jpg" download>Download</a>
+          <p class="small muted credit">Photo: Aldo samulo, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Ban_rusak.JPG">Wikimedia Commons</a></p>
+        </div>
+      </li>
+      <li class="card sample">
+        <a href="10-sidewall-cut.jpg" download><img src="10-sidewall-cut.jpg" alt="Cut in sidewall" loading="lazy"></a>
+        <div class="sample-body">
+          <div class="finding-text">Cut in sidewall</div>
+          <div class="small">Expected: <strong class="status-replace">Replace</strong></div>
+          <a class="btn" href="10-sidewall-cut.jpg" download>Download</a>
+          <p class="small muted credit">Photo: Photograph by Mike Peel (www.mikepeel.net), <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Cars_in_S%C3%A3o_Paulo_2017_09.jpg">Wikimedia Commons</a></p>
+        </div>
+      </li>
+    </ul>
+  </main>
+  <footer><p class="small muted">All photos are freely licensed and credited above.</p></footer>
+</body>
+</html>

@@ -3,7 +3,7 @@
 //  - models/<task>.json: network-first (so retrained models are noticed)
 //  - models/*.onnx?v=<sha>: cache-first; older versions of the same file are evicted
 //  - onnxruntime-web from the CDN: cache-first (version-pinned URL)
-const CACHE = 'tyrecheck-v3';
+const CACHE = 'tyrecheck-v4';
 const SHELL = [
   './',
   'index.html',
