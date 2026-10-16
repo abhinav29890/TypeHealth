@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -17,7 +17,7 @@
       <img src="icons/icon.svg" alt="" width="28" height="28">
       <span>TyreCheck</span>
     </div>
-    <span id="model-status" class="pill pill-loading" role="status">Loading modelsâ€¦</span>
+    <span id="model-status" class="pill pill-loading" role="status">Loading models…</span>
   </header>
 
   <main>
@@ -26,28 +26,6 @@
       Train real models with the notebooks in <code>training/notebooks</code>.
     </div>
     <div id="error-banner" class="banner banner-error" hidden></div>
-
-    <section class="card" aria-labelledby="job-title">
-      <h2 id="job-title">Job details <span class="muted">(optional)</span></h2>
-      <div class="grid-3">
-        <label>Vehicle reg.
-          <input id="vehicle" type="text" autocomplete="off" placeholder="e.g. KA01AB1234">
-        </label>
-        <label>Tyre position
-          <select id="position">
-            <option value="">â€”</option>
-            <option>Front left</option>
-            <option>Front right</option>
-            <option>Rear left</option>
-            <option>Rear right</option>
-            <option>Spare</option>
-          </select>
-        </label>
-        <label>Notes
-          <input id="notes" type="text" autocomplete="off" placeholder="e.g. customer reports vibration">
-        </label>
-      </div>
-    </section>
 
     <section class="card" aria-labelledby="photo-title">
       <h2 id="photo-title">Tyre photo</h2>
@@ -77,7 +55,7 @@
           <div class="photo-wrap">
             <canvas id="photo" width="448" height="448" aria-label="Analysed area of the photo"></canvas>
             <canvas id="overlay" width="448" height="448" aria-hidden="true"></canvas>
-            <div id="busy" class="busy" hidden><div class="spinner"></div><span>Analysingâ€¦</span></div>
+            <div id="busy" class="busy" hidden><div class="spinner"></div><span>Analysing…</span></div>
           </div>
           <div id="view-toggle" class="segmented" role="radiogroup" aria-label="Overlay">
             <button type="button" role="radio" aria-checked="true" data-view="none">Photo</button>

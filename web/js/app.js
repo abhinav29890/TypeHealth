@@ -101,7 +101,6 @@ async function analyse(file) {
         score: health.score,
         status: health.status,
         headline: health.headline,
-        ...jobDetails(),
       }));
     }
   } catch (err) {
@@ -111,14 +110,6 @@ async function analyse(file) {
     bitmap?.close();
     el.busy.hidden = true;
   }
-}
-
-function jobDetails() {
-  return {
-    vehicle: $('vehicle').value.trim(),
-    position: $('position').value,
-    notes: $('notes').value.trim(),
-  };
 }
 
 function renderQuality(quality) {
@@ -147,8 +138,6 @@ function gauge(score, status) {
 }
 
 function renderReport(health) {
-  const job = jobDetails();
-  const jobLine = [job.vehicle, job.position, job.notes].filter(Boolean).map(escapeHtml).join(' · ');
   const when = new Date().toLocaleString();
 
   if (!health.valid) {
@@ -176,7 +165,6 @@ function renderReport(health) {
       <div>
         <div class="muted small">Tyre health score</div>
         <p class="headline status-${health.status}">${health.headline}</p>
-        ${jobLine ? `<div class="small">${jobLine}</div>` : ''}
         <div class="muted small">${escapeHtml(when)}</div>
       </div>
     </div>
@@ -226,17 +214,14 @@ function renderHistory(list) {
     el.history.innerHTML = '<li class="muted small">No checks yet.</li>';
     return;
   }
-  el.history.innerHTML = list.map((h) => {
-    const title = [h.vehicle, h.position].filter(Boolean).join(' · ') || h.headline;
-    return `<li>
+  el.history.innerHTML = list.map((h) => `<li>
       <img src="${h.thumb}" alt="">
       <div class="h-main">
-        <div class="h-title">${escapeHtml(title)}</div>
-        <div class="muted small">${escapeHtml(new Date(h.date).toLocaleString())}${h.notes ? ` · ${escapeHtml(h.notes)}` : ''}</div>
+        <div class="h-title">${escapeHtml(h.headline)}</div>
+        <div class="muted small">${escapeHtml(new Date(h.date).toLocaleString())}</div>
       </div>
       <span class="h-score status-${h.status}">${h.score}</span>
-    </li>`;
-  }).join('');
+    </li>`).join('');
 }
 
 $('clear-history').addEventListener('click', () => {

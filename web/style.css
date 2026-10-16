@@ -106,19 +106,6 @@ main { max-width: 980px; margin: 0 auto; padding: 16px; display: grid; gap: 16px
 }
 .banner-error { background: var(--bad-bg); border-color: var(--bad); }
 
-.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-label { display: grid; gap: 4px; font-size: 0.875rem; color: var(--muted); }
-input[type="text"], select {
-  font: inherit;
-  color: var(--text);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 9px 10px;
-  min-height: 44px;
-  width: 100%;
-}
-
 .dropzone {
   border: 2px dashed var(--border);
   border-radius: var(--radius);
@@ -149,7 +136,7 @@ input[type="text"], select {
 .btn-primary { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
 .btn-primary:hover { background: var(--accent); filter: brightness(1.08); }
 .btn-ghost { border-color: transparent; background: transparent; color: var(--muted); min-height: 36px; padding: 0 10px; }
-button:focus-visible, .btn:focus-within, input:focus-visible, select:focus-visible {
+button:focus-visible, .btn:focus-within {
   outline: 3px solid var(--accent);
   outline-offset: 2px;
 }
@@ -247,7 +234,6 @@ button:focus-visible, .btn:focus-within, input:focus-visible, select:focus-visib
 footer { text-align: center; padding: 8px 16px 24px; }
 
 @media (max-width: 720px) {
-  .grid-3 { grid-template-columns: 1fr; }
   .result-grid { grid-template-columns: 1fr; }
 }
 
