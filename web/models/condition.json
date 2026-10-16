@@ -1,7 +1,7 @@
 {
   "task": "condition",
   "file": "condition.onnx",
-  "sha256": "96f579e34218f9b9",
+  "sha256": "7d7573a31b3b56ae",
   "labels": [
     "good",
     "defective",
@@ -19,8 +19,10 @@
     0.225
   ],
   "arch": "efficientnet_b0",
-  "quantized": true,
-  "int8_agreement": 0.9375,
-  "placeholder": true,
-  "metrics": null
+  "quantized": false,
+  "int8_agreement": 0.7191,
+  "placeholder": false,
+  "metrics": {
+    "val_f1": 0.9773
+  }
 }

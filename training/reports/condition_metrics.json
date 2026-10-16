@@ -1,0 +1,60 @@
+{
+  "task": "condition",
+  "split": "test",
+  "n": 445,
+  "classes": [
+    "good",
+    "defective",
+    "not_tyre"
+  ],
+  "report": {
+    "good": {
+      "precision": 0.94,
+      "recall": 0.9791666666666666,
+      "f1-score": 0.9591836734693877,
+      "support": 144.0
+    },
+    "defective": {
+      "precision": 0.9797297297297297,
+      "recall": 0.9602649006622517,
+      "f1-score": 0.9698996655518395,
+      "support": 151.0
+    },
+    "not_tyre": {
+      "precision": 1.0,
+      "recall": 0.98,
+      "f1-score": 0.98989898989899,
+      "support": 150.0
+    },
+    "accuracy": 0.9730337078651685,
+    "macro avg": {
+      "precision": 0.9732432432432433,
+      "recall": 0.9731438557763061,
+      "f1-score": 0.9729941096400724,
+      "support": 445.0
+    },
+    "weighted avg": {
+      "precision": 0.9737060431217734,
+      "recall": 0.9730337078651685,
+      "f1-score": 0.9731733639612766,
+      "support": 445.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      141,
+      3,
+      0
+    ],
+    [
+      6,
+      145,
+      0
+    ],
+    [
+      3,
+      0,
+      147
+    ]
+  ]
+}
