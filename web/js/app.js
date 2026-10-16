@@ -86,7 +86,8 @@ async function analyse(file) {
       outputs[task] = await classify(model, toTensorData(rgba, size, mean, std));
     }
 
-    const health = computeHealth(outputs.condition, outputs.tread ?? null, quality);
+    const health = computeHealth(outputs.condition, outputs.tread ?? null, quality,
+      { treadBeta: Boolean(models.tread?.meta.beta) });
     last = { outputs, models, health };
     renderQuality(quality);
     renderReport(health);
@@ -160,7 +161,8 @@ function renderReport(health) {
     <div class="finding">
       <div class="finding-top">
         <div>
-          <div class="finding-aspect">${escapeHtml(f.aspect)}</div>
+          <div class="finding-aspect">${escapeHtml(f.aspect)}${f.beta
+            ? ' <span class="badge" title="Low accuracy. Confirm with a tread-depth gauge.">Beta</span>' : ''}</div>
           <div class="finding-text">${escapeHtml(f.text)}</div>
         </div>
         <span class="muted small">${Math.round(f.confidence * 100)}% confident</span>

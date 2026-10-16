@@ -1,7 +1,7 @@
 {
   "task": "tread",
   "file": "tread.onnx",
-  "sha256": "96f579e34218f9b9",
+  "sha256": "21a3b0fb788ac6a9",
   "labels": [
     "good",
     "moderate",
@@ -19,8 +19,12 @@
     0.225
   ],
   "arch": "efficientnet_b0",
-  "quantized": true,
-  "int8_agreement": 0.9375,
-  "placeholder": true,
-  "metrics": null
+  "quantized": false,
+  "int8_agreement": 0.3806,
+  "placeholder": false,
+  "beta": true,
+  "metrics": {
+    "val_f1": 0.7603,
+    "test_macro_f1": 0.7137
+  }
 }

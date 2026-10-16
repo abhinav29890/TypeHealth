@@ -24,6 +24,7 @@ import torch
 from onnxruntime.quantization import (CalibrationDataReader, QuantFormat, QuantType,
                                       quantize_static)
 from onnxruntime.quantization.shape_inference import quant_pre_process
+from sklearn.metrics import f1_score
 
 from .config import ARCH, IMG_SIZE, MEAN, STD, TASKS
 from .dataset import eval_tensor, load_rgb, make_splits
@@ -91,6 +92,12 @@ def top1_agreement(path_a, path_b, batches):
     return same / total
 
 
+def shipped_macro_f1(path, batches, labels):
+    sess = session(path)
+    preds = np.concatenate([sess.run(["logits"], {"input": x})[0].argmax(1) for x in batches])
+    return float(f1_score(labels, preds, average="macro"))
+
+
 def image_batches(paths, bs=16):
     for i in range(0, len(paths), bs):
         yield torch.stack([eval_tensor(load_rgb(p)) for p in paths[i:i + bs]]).numpy()
@@ -113,6 +120,8 @@ def main(argv=None):
     ap.add_argument("--min-agree", type=float, default=0.98)
     ap.add_argument("--calib", type=int, default=200, help="number of calibration images")
     ap.add_argument("--placeholder", choices=TASKS, help="export an UNTRAINED model for this task")
+    ap.add_argument("--beta-below", type=float, default=0.85,
+                    help="mark the model as beta in the app if test macro-F1 is below this")
     args = ap.parse_args(argv)
 
     out = Path(args.out)
@@ -152,6 +161,13 @@ def main(argv=None):
         fp32.rename(int8)
     shipped = int8
 
+    beta = True
+    if metrics is not None:
+        test_f1 = shipped_macro_f1(shipped, check, splits["test"][1])
+        metrics["test_macro_f1"] = round(test_f1, 4)
+        beta = test_f1 < args.beta_below
+        print(f"shipped model test macro-F1: {test_f1:.3f}" + ("  -> marked BETA in the app" if beta else ""))
+
     write_meta(out / f"{task}.json", {
         "task": task,
         "file": shipped.name,
@@ -164,6 +180,7 @@ def main(argv=None):
         "quantized": quantized,
         "int8_agreement": round(agree, 4),
         "placeholder": bool(args.placeholder),
+        "beta": beta,
         "metrics": metrics,
     })
     print(f"wrote {shipped} ({shipped.stat().st_size / 1e6:.1f} MB) and {task}.json")

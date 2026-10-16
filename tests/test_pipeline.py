@@ -61,4 +61,5 @@ def test_train_evaluate_export(tmp_path):
     meta = json.loads((web / "condition.json").read_text())
     assert (web / meta["file"]).exists()
     assert meta["placeholder"] is False
+    assert "test_macro_f1" in meta["metrics"] and isinstance(meta["beta"], bool)
     assert not list(web.glob("*.fp32.onnx"))  # only the shipped model remains

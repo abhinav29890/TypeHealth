@@ -16,6 +16,8 @@ const DEFECT_CAP = 40;
 const WORN_CAP = 35;
 const MODERATE_CAP = 65;
 const CONDITION_WEIGHT = 0.6;
+// A model marked beta (test macro-F1 below the export threshold) counts for less.
+const CONDITION_WEIGHT_TREAD_BETA = 0.85;
 
 export function softmax(logits) {
   const max = Math.max(...logits);
@@ -41,8 +43,9 @@ const TREAD_TEXT = { good: 'Good tread depth', moderate: 'Partially worn tread',
  * @param {{labels:string[], probs:number[]}} condition  output of the condition model
  * @param {{labels:string[], probs:number[]}|null} tread  output of the tread model
  * @param {{issues:{code:string, message:string, severe:boolean}[]}} [quality]
+ * @param {{treadBeta?: boolean}} [options]  treadBeta: the tread model is low-accuracy (from tread.json)
  */
-export function computeHealth(condition, tread, quality = { issues: [] }) {
+export function computeHealth(condition, tread, quality = { issues: [] }, { treadBeta = false } = {}) {
   const c = toMap(condition);
   const notTyre = c.not_tyre ?? 0;
   if (notTyre >= THRESHOLDS.notTyre) {
@@ -85,12 +88,14 @@ export function computeHealth(condition, tread, quality = { issues: [] }) {
       text: TREAD_TEXT[tt.label] ?? tt.label,
       confidence: tt.prob,
       severity: { good: 'ok', moderate: 'warn', worn: 'bad' }[tt.label] ?? 'warn',
+      beta: treadBeta,
     });
   }
 
+  const wc = treadBeta ? CONDITION_WEIGHT_TREAD_BETA : CONDITION_WEIGHT;
   let score = treadScore === null
     ? 100 * pGood
-    : 100 * (CONDITION_WEIGHT * pGood + (1 - CONDITION_WEIGHT) * treadScore);
+    : 100 * (wc * pGood + (1 - wc) * treadScore);
   if (pDefect >= THRESHOLDS.defect) score = Math.min(score, DEFECT_CAP);
   if (pWorn >= THRESHOLDS.worn) score = Math.min(score, WORN_CAP);
   if (pModerate >= THRESHOLDS.moderate) score = Math.min(score, MODERATE_CAP);
@@ -108,11 +113,11 @@ export function computeHealth(condition, tread, quality = { issues: [] }) {
     findings,
     uncertain,
     lowQuality,
-    recommendations: recommend(findings, status, uncertain, lowQuality),
+    recommendations: recommend(findings, status, uncertain, lowQuality, treadBeta && tread !== null),
   };
 }
 
-function recommend(findings, status, uncertain, lowQuality) {
+function recommend(findings, status, uncertain, lowQuality, treadBeta) {
   const recs = [];
   const has = (aspect, key) => findings.some((f) => f.aspect === aspect && f.key === key);
 
@@ -125,6 +130,9 @@ function recommend(findings, status, uncertain, lowQuality) {
   } else if (has('Tread wear', 'moderate')) {
     recs.push('Plan for replacement soon and re-check tread depth with a gauge at the next service.');
     recs.push('Check pressure and wheel alignment if wear looks uneven across the tread.');
+  }
+  if (treadBeta) {
+    recs.push('The tread-wear estimate is in beta and can miss worn tyres. Always confirm tread depth with a gauge.');
   }
   if (status === 'ok') {
     recs.push('No action needed. Check pressure monthly and rotate tyres every 8,000–10,000 km.');

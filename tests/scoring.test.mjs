@@ -86,3 +86,16 @@ test('quality check flags flat dark images and passes sharp ones', () => {
   }
   assert.equal(assessQuality(sharp, size).issues.length, 0);
 });
+
+test('beta tread model counts less and always asks for a gauge check', () => {
+  const c = cond(0.95, 0.04, 0.01);
+  const t = tread(0.05, 0.45, 0.5);
+  const normal = computeHealth(c, tread(0.3, 0.45, 0.25));
+  const beta = computeHealth(c, tread(0.3, 0.45, 0.25), { issues: [] }, { treadBeta: true });
+  assert.ok(beta.score > normal.score);
+  assert.equal(beta.findings[1].beta, true);
+  assert.ok(beta.recommendations.some((r) => r.includes('beta')));
+  assert.ok(!normal.recommendations.some((r) => r.includes('beta')));
+  // a confident "worn" from the beta model still caps the score (errs on the safe side)
+  assert.ok(computeHealth(c, t, { issues: [] }, { treadBeta: true }).score <= 35);
+});

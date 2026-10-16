@@ -105,7 +105,10 @@ pytest tests                               # ONNX parity + train→evaluate→ex
 ## Limitations
 
 - This is a **visual screening aid**, not a replacement for a physical inspection and a tread-depth gauge.
-- The public tread data is small (~900 images, only ~200 "worn"), so expect the tread model to be the
-  weaker of the two until it's also trained on the mechanic's own photos. Re-train whenever you have collected more labelled photos.
+- The public tread data is small (~900 images, only ~200 "worn"). The current tread model reaches
+  macro-F1 0.71 and finds only 41% of worn tyres, so the app marks it **Beta**. A model is marked beta
+  automatically when its test macro-F1 is below 0.85 (`export_onnx --beta-below`). A beta tread result
+  counts for less in the score, and the report always asks for a gauge check. Retrain with the mechanic's
+  own photos to improve it. The condition model (macro-F1 0.97) is not beta. Re-train whenever you have collected more labelled photos.
 - Score thresholds in `scoring.js` and quality thresholds in `quality.js` are starting points. Tune them on
   real photos from the workshop.

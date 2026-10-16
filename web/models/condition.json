@@ -22,7 +22,9 @@
   "quantized": false,
   "int8_agreement": 0.7191,
   "placeholder": false,
+  "beta": false,
   "metrics": {
-    "val_f1": 0.9773
+    "val_f1": 0.9773,
+    "test_macro_f1": 0.973
   }
 }

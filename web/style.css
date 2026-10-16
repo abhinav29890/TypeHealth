@@ -207,6 +207,18 @@ button:focus-visible, .btn:focus-within, input:focus-visible, select:focus-visib
 .finding-top { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
 .finding-aspect { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
 .finding-text { font-weight: 600; }
+.badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 6px;
+  border-radius: 4px;
+  background: var(--warn-bg);
+  color: var(--warn);
+  border: 1px solid var(--warn);
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  vertical-align: 1px;
+}
 .bar { height: 8px; border-radius: 4px; background: var(--surface-2); margin-top: 6px; overflow: hidden; }
 .bar > span { display: block; height: 100%; border-radius: 4px; }
 .sev-ok { background: var(--ok); }
